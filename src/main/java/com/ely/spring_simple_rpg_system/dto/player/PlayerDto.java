@@ -1,4 +1,4 @@
-package com.ely.spring_simple_rpg_system.dto;
+package com.ely.spring_simple_rpg_system.dto.player;
 
 import com.ely.spring_simple_rpg_system.entity.Item;
 import java.util.List;

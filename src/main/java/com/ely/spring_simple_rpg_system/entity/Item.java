@@ -27,5 +27,5 @@ public class Item {
     @Column(nullable = false)
     private ItemUsages itemUsage;
 
-    private int effectValue;
+    private Long effectValue;
 }

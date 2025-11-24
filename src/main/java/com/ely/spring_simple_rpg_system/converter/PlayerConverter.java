@@ -1,7 +1,7 @@
 package com.ely.spring_simple_rpg_system.converter;
 
-import com.ely.spring_simple_rpg_system.dto.PlayerCreationDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerCreationDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerDto;
 import com.ely.spring_simple_rpg_system.entity.Player;
 
 public class PlayerConverter {

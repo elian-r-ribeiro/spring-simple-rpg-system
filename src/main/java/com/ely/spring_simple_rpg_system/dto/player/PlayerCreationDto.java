@@ -1,4 +1,4 @@
-package com.ely.spring_simple_rpg_system.dto;
+package com.ely.spring_simple_rpg_system.dto.player;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

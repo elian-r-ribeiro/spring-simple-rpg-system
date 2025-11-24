@@ -1,16 +1,15 @@
 package com.ely.spring_simple_rpg_system.service;
 
 import com.ely.spring_simple_rpg_system.converter.PlayerConverter;
-import com.ely.spring_simple_rpg_system.dto.PlayerCreationDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerUpdateDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerCreationDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerUpdateDto;
 import com.ely.spring_simple_rpg_system.entity.Player;
 import com.ely.spring_simple_rpg_system.exception.PlayerNotFoundException;
 import com.ely.spring_simple_rpg_system.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

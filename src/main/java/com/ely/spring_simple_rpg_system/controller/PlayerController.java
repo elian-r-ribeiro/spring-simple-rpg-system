@@ -1,16 +1,14 @@
 package com.ely.spring_simple_rpg_system.controller;
 
-import com.ely.spring_simple_rpg_system.dto.ErrorDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerCreationDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerDto;
-import com.ely.spring_simple_rpg_system.dto.PlayerUpdateDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerCreationDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerUpdateDto;
 import com.ely.spring_simple_rpg_system.service.PlayerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
