@@ -3,12 +3,15 @@ package com.ely.spring_simple_rpg_system.controller;
 import com.ely.spring_simple_rpg_system.dto.ErrorDto;
 import com.ely.spring_simple_rpg_system.dto.PlayerCreationDto;
 import com.ely.spring_simple_rpg_system.dto.PlayerDto;
+import com.ely.spring_simple_rpg_system.dto.PlayerUpdateDto;
 import com.ely.spring_simple_rpg_system.service.PlayerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/players")
@@ -18,8 +21,28 @@ public class PlayerController {
     private PlayerService playerService;
 
     @PostMapping(path = "/new-player", version = "1.0")
-    private PlayerDto createPlayer(@RequestBody @Valid PlayerCreationDto data) {
+    private ResponseEntity<PlayerDto> createPlayer(@RequestBody @Valid PlayerCreationDto data) {
+        return ResponseEntity.ok(playerService.createPlayer(data));
+    }
 
-        return playerService.createPlayer(data);
+    @GetMapping(version = "1.0")
+    private ResponseEntity<Set<PlayerDto>> getAllPlayers() {
+        return ResponseEntity.ok(playerService.getAllPlayers());
+    }
+
+    @GetMapping(path = "/{id}", version = "1.0")
+    private ResponseEntity<PlayerDto> getPlayerById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(playerService.getPlayerById(id));
+    }
+
+    @PutMapping(path = "/{id}", version = "1.0")
+    private ResponseEntity<PlayerDto> updatePlayer(@RequestBody PlayerUpdateDto data, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(playerService.updatePlayer(data, id));
+    }
+
+    @DeleteMapping(path = "/{id}", version = "1.0")
+    private ResponseEntity<Void> deletePlayer(@PathVariable("id") Long id) {
+        playerService.deletePlayer(id);
+        return ResponseEntity.noContent().build();
     }
 }
