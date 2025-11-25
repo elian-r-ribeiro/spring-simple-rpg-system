@@ -33,12 +33,12 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.getPlayerById(id));
     }
 
-    @PutMapping(path = "/{id}", version = "1.0")
+    @PutMapping(path = "/update-player/{id}", version = "1.0")
     private ResponseEntity<PlayerDto> updatePlayer(@RequestBody PlayerUpdateDto data, @PathVariable("id") Long id) {
         return ResponseEntity.ok(playerService.updatePlayer(data, id));
     }
 
-    @DeleteMapping(path = "/{id}", version = "1.0")
+    @DeleteMapping(path = "/delete-player/{id}", version = "1.0")
     private ResponseEntity<Void> deletePlayer(@PathVariable("id") Long id) {
         playerService.deletePlayer(id);
         return ResponseEntity.noContent().build();
