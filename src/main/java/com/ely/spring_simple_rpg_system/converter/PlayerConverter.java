@@ -17,6 +17,7 @@ public class PlayerConverter {
                 null,
                 null,
                 null,
+                null,
                 null
         );
     }
@@ -31,6 +32,7 @@ public class PlayerConverter {
                 player.getPlayerMaxHp(),
                 player.getPlayerLevel(),
                 player.getPlayerXp(),
+                player.getPlayerRequiredXpToNextLevel(),
                 player.getPlayerItems()
         );
     }

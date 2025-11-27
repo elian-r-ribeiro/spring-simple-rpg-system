@@ -35,6 +35,8 @@ public class Player {
 
     private Long playerXp;
 
+    private Long playerRequiredXpToNextLevel;
+
     @ManyToMany
     @JoinTable(
             name = "players_items",
@@ -52,5 +54,6 @@ public class Player {
         if(playerMaxHp == null) this.playerMaxHp = 50L;
         if(playerLevel == null) this.playerLevel = 1L;
         if(playerXp == null) this.playerXp = 0L;
+        if(playerRequiredXpToNextLevel == null) this.playerRequiredXpToNextLevel = 100L;
     }
 }

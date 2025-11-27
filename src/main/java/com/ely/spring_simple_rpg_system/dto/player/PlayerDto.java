@@ -20,6 +20,8 @@ public record PlayerDto(
 
         Long playerXp,
 
+        Long playerRequiredXpToNextLevel,
+
         List<Item> playerItems
 ) {
 }

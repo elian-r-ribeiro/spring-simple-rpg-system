@@ -2,6 +2,8 @@ package com.ely.spring_simple_rpg_system.service;
 
 import com.ely.spring_simple_rpg_system.entity.Enemy;
 import com.ely.spring_simple_rpg_system.entity.Player;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,36 +15,54 @@ import java.util.concurrent.ThreadLocalRandom;
 @AllArgsConstructor
 public class CombatService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
     private PlayerService playerService;
     private EnemyService enemyService;
 
     public List<String> executeCombat(Long playerId, Long enemyId) {
-        List<String> logs = new ArrayList<>(List.of());
+        final Player player = playerService.findPlayerByIdOrThrowException(playerId);
+        final Enemy enemy = enemyService.findEnemyByIdOrThrowException(enemyId);
+        final List<String> logs = new ArrayList<>(List.of());
         final int playerRoll = ThreadLocalRandom.current().nextInt(1, 21);
         final int enemyRoll = ThreadLocalRandom.current().nextInt(1, 21);
         boolean isPlayerTurn = playerRoll >= enemyRoll;
 
+        entityManager.detach(enemy);
+
         addRollsAndWhoAttacksFirstToLogs(logs, enemyRoll, playerRoll);
-        executeCombatLoop(logs, playerId, enemyId, isPlayerTurn);
+        executeCombatLoop(logs, player, enemy, isPlayerTurn);
+        final boolean didPlayerWin = checkIfPlayerWon(player.getPlayerCurrentHp());
+        if(didPlayerWin) {
+            addEnemyXpDropToPlayerOnWin(logs, player, enemy.getEnemyXpDrop());
+            checkIfPlayerLeveldUpOnWin(logs, player);
+        } else {
+            ifPlayerLostRecoverHp(player);
+        }
+
+        playerService.playerRepository.save(player);
 
         return logs;
     }
     
-    private void executeCombatLoop(List<String> logs, Long playerId, Long enemyId, boolean isPlayerTurn) {
-        final Player player = playerService.findPlayerByIdOrThrowException(playerId);
-        final Enemy enemy = enemyService.findEnemyByIdOrThrowException(enemyId);
+    private void executeCombatLoop(List<String> logs, Player player, Enemy enemy, boolean isPlayerTurn) {
 
         while (player.getPlayerCurrentHp() > 0L && enemy.getEnemyHp() > 0L) {
-            System.out.println("Chegou aqui!");
             if(isPlayerTurn) {
                 addPlayerTurnBeginningLogs(logs, enemy.getEnemyHp(), enemy.getEnemyDp());
-                enemy.setEnemyHp(
-                        enemy.getEnemyHp() - (player.getPlayerAttackPower() - enemy.getEnemyDp()));
+
+                long damage = player.getPlayerAttackPower() - enemy.getEnemyDp();
+                damage = Math.max(0, damage);
+
+                enemy.setEnemyHp(enemy.getEnemyHp() - damage);
                 addPlayerTurnEndingLogs(logs, player.getPlayerAttackPower(), enemy.getEnemyHp());
             } else {
                 addEnemyTurnBeginningLogs(logs, player.getPlayerCurrentHp(), player.getPlayerDefensePower());
-                player.setPlayerCurrentHp(
-                        player.getPlayerCurrentHp() - (enemy.getEnemyAp() - player.getPlayerDefensePower()));
+
+                long damage = enemy.getEnemyAp() - player.getPlayerDefensePower();
+                damage = Math.max(0, damage);
+
+                player.setPlayerCurrentHp(player.getPlayerCurrentHp() - damage);
                 addEnemyTurnEndingLogs(logs, enemy.getEnemyAp(), player.getPlayerCurrentHp());
             }
 
@@ -50,8 +70,31 @@ public class CombatService {
         }
 
         addCombatEndingLogs(logs, player.getPlayerCurrentHp(), enemy.getEnemyHp());
+    }
 
-        if(player.getPlayerCurrentHp() >= 0L) player.setPlayerCurrentHp(1L);
+    private boolean checkIfPlayerWon(Long playerHp) {
+        return playerHp > 0;
+    }
+
+    private void ifPlayerLostRecoverHp(Player player) {
+        if(player.getPlayerCurrentHp() <= 0L) player.setPlayerCurrentHp(1L);
+    }
+
+    private void checkIfPlayerLeveldUpOnWin(List<String> logs, Player player) {
+        if(player.getPlayerXp() >= player.getPlayerRequiredXpToNextLevel()) {
+            logs.add("O jogador subiu de nível!");
+            player.setPlayerLevel(player.getPlayerLevel() + 1L);
+            player.setPlayerXp(0L);
+            player.setPlayerRequiredXpToNextLevel(player.getPlayerRequiredXpToNextLevel() + 100);
+            player.setPlayerMaxHp(player.getPlayerMaxHp() + 10);
+            player.setPlayerAttackPower(player.getPlayerAttackPower() + 5);
+            player.setPlayerDefensePower(player.getPlayerDefensePower() + 5);
+        }
+    }
+
+    private void addEnemyXpDropToPlayerOnWin(List<String> logs, Player player, Long enemyXpDrop) {
+        logs.add("O jogador recebeu " + enemyXpDrop + " de XP.");
+        player.setPlayerXp(player.getPlayerXp() + enemyXpDrop);
     }
 
     private void addRollsAndWhoAttacksFirstToLogs(List<String> logs, int enemyRoll, int playerRoll) {
@@ -100,7 +143,7 @@ public class CombatService {
 
     private void addCombatEndingLogs(List<String> logs, Long playerHp, Long enemyHp) {
         if(playerHp <= 0L) {
-            logs.add("O inimigo venceu e o jogador agora está com 1 de vida.");
+            logs.add("O inimigo venceu, terminando com " + enemyHp + " e o jogador agora está com 1 de vida.");
         } else {
             logs.add("O jogador venceu e terminou com " + playerHp + " de vida.");
         }
