@@ -48,7 +48,7 @@ public class EnemyService {
         enemyRepository.deleteById(id);
     }
 
-    private Enemy findEnemyByIdOrThrowException(Long id) {
+    public Enemy findEnemyByIdOrThrowException(Long id) {
         return enemyRepository.findById(id).orElseThrow(() -> new EnemyNotFoundException(id));
     }
 }

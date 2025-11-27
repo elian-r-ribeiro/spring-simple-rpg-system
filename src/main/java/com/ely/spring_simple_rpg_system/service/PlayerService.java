@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PlayerService {
 
-    private PlayerRepository playerRepository;
+    public PlayerRepository playerRepository;
 
     public PlayerDto createPlayer(PlayerCreationDto data) {
         Player newPlayer = playerRepository.save(PlayerConverter.fromCreationDtoToPlayer(data));
@@ -48,7 +48,7 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
-    private Player findPlayerByIdOrThrowException(Long id) {
+    public Player findPlayerByIdOrThrowException(Long id) {
         return playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException(id));
     }
 }
