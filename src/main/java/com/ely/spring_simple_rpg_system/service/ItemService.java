@@ -48,7 +48,7 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    private Item findItemByIdOrThrowException(Long id) {
+    public Item findItemByIdOrThrowException(Long id) {
         return itemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
     }
 }

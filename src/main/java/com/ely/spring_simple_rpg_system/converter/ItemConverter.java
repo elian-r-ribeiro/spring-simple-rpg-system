@@ -3,7 +3,10 @@ package com.ely.spring_simple_rpg_system.converter;
 import com.ely.spring_simple_rpg_system.dto.item.ItemCreationDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemUpdateDto;
+import com.ely.spring_simple_rpg_system.dto.item.ItemsListDto;
 import com.ely.spring_simple_rpg_system.entity.Item;
+
+import java.util.List;
 
 public class ItemConverter {
 
@@ -23,6 +26,10 @@ public class ItemConverter {
                 item.getItemUsage(),
                 item.getEffectValue()
         );
+    }
+
+    public static ItemsListDto fromItemsListToItemListDto(List<Item> itemsList) {
+        return new ItemsListDto(itemsList);
     }
 
     public static void mergeChanges(Item item, ItemUpdateDto dto) {
