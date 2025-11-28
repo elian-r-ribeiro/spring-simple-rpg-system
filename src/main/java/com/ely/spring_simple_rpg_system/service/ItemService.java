@@ -1,10 +1,13 @@
 package com.ely.spring_simple_rpg_system.service;
 
 import com.ely.spring_simple_rpg_system.converter.ItemConverter;
+import com.ely.spring_simple_rpg_system.converter.PlayerConverter;
 import com.ely.spring_simple_rpg_system.dto.item.ItemCreationDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemUpdateDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerDto;
 import com.ely.spring_simple_rpg_system.entity.Item;
+import com.ely.spring_simple_rpg_system.entity.Player;
 import com.ely.spring_simple_rpg_system.exception.ItemNotFoundException;
 import com.ely.spring_simple_rpg_system.repository.ItemRepository;
 import lombok.AllArgsConstructor;

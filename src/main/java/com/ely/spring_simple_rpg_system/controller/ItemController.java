@@ -3,6 +3,7 @@ package com.ely.spring_simple_rpg_system.controller;
 import com.ely.spring_simple_rpg_system.dto.item.ItemCreationDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemDto;
 import com.ely.spring_simple_rpg_system.dto.item.ItemUpdateDto;
+import com.ely.spring_simple_rpg_system.dto.player.PlayerDto;
 import com.ely.spring_simple_rpg_system.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

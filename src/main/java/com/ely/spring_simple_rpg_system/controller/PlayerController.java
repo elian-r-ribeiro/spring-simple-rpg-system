@@ -24,12 +24,6 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.createPlayer(data));
     }
 
-    @PostMapping(path = "/add-item-to-player/{playerId}/{itemId}", version = "1.0")
-    private ResponseEntity<PlayerDto> addItemToPlayerItems(@PathVariable("playerId") Long playerId,
-                                                           @PathVariable("itemId") Long itemId) {
-        return ResponseEntity.ok(playerService.addItemToPlayerItems(playerId, itemId));
-    }
-
     @GetMapping(version = "1.0")
     private ResponseEntity<Set<PlayerDto>> getAllPlayers() {
         return ResponseEntity.ok(playerService.getAllPlayers());
@@ -38,11 +32,6 @@ public class PlayerController {
     @GetMapping(path = "/{id}", version = "1.0")
     private ResponseEntity<PlayerDto> getPlayerById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(playerService.getPlayerById(id));
-    }
-
-    @GetMapping(path = "/get-player-items/{id}", version = "1.0")
-    private ResponseEntity<ItemsListDto> getPlayerItems(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(playerService.getPlayerItems(id));
     }
 
     @PutMapping(path = "/update-player/{id}", version = "1.0")

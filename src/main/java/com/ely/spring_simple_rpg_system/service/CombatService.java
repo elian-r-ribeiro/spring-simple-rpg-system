@@ -40,7 +40,7 @@ public class CombatService {
             recoverPlayerAfterDefeat(player);
         }
 
-        playerService.savePlayerAfterCombat(player);
+        playerService.savePlayer(player);
 
         return logs;
     }

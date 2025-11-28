@@ -21,20 +21,11 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private PlayerRepository playerRepository;
-    private ItemService itemService;
 
     public PlayerDto createPlayer(PlayerCreationDto data) {
         Player newPlayer = playerRepository.save(PlayerConverter.fromCreationDtoToPlayer(data));
 
         return PlayerConverter.fromPlayerToDto(newPlayer);
-    }
-
-    public PlayerDto addItemToPlayerItems(Long playerId, Long itemId) {
-        final Player player = findPlayerByIdOrThrowException(playerId);
-        final Item item = itemService.findItemByIdOrThrowException(itemId);
-
-        player.getItems().add(item);
-        return PlayerConverter.fromPlayerToDto(playerRepository.save(player));
     }
 
     public Set<PlayerDto> getAllPlayers() {
@@ -45,11 +36,6 @@ public class PlayerService {
 
     public PlayerDto getPlayerById(Long id) {
         return PlayerConverter.fromPlayerToDto(findPlayerByIdOrThrowException(id));
-    }
-
-    public ItemsListDto getPlayerItems(Long id) {
-        final Player player = findPlayerByIdOrThrowException(id);
-        return ItemConverter.fromItemsListToItemListDto(player.getItems());
     }
 
     public PlayerDto updatePlayer(PlayerUpdateDto data, Long id) {
@@ -69,7 +55,7 @@ public class PlayerService {
         return playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException(id));
     }
 
-    public void savePlayerAfterCombat(Player player) {
-        playerRepository.save(player);
+    public Player savePlayer(Player player) {
+        return playerRepository.save(player);
     }
 }
