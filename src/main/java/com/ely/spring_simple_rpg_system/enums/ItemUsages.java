@@ -7,32 +7,32 @@
         RECOVER_HP {
             @Override
             public void useItem(Player player, Item item) {
-                long newHp = player.getPlayerCurrentHp() + item.getEffectValue();
-                player.setPlayerCurrentHp(Math.min(newHp, player.getPlayerMaxHp()));
+                long newHp = player.getCurrentHp() + item.getEffectValue();
+                player.setCurrentHp(Math.min(newHp, player.getMaxHp()));
             }
         },
         INCREASE_AP{
             @Override
             public void useItem(Player player, Item item) {
-                player.setPlayerAttackPower(player.getPlayerAttackPower() + item.getEffectValue());
+                player.setAttackPower(player.getAttackPower() + item.getEffectValue());
             }
         },
         INCREASE_DP{
             @Override
             public void useItem(Player player, Item item) {
-                player.setPlayerDefensePower(player.getPlayerDefensePower() + item.getEffectValue());
+                player.setDefensePower(player.getDefensePower() + item.getEffectValue());
             }
         },
         INCREASE_XP{
             @Override
             public void useItem(Player player, Item item) {
-                player.setPlayerXp(player.getPlayerXp() + item.getEffectValue());
+                player.setXp(player.getXp() + item.getEffectValue());
             }
         },
         INCREASE_LEVEL{
             @Override
             public void useItem(Player player, Item item) {
-                player.setPlayerLevel(player.getPlayerLevel() + item.getEffectValue());
+                player.setLevel(player.getLevel() + item.getEffectValue());
             }
         };
 

@@ -8,18 +8,18 @@ public record EnemyCreationDto(
         @NotBlank(message = "O nome do inimigo é obrigatório.")
         @Size(min = 3, message = "O nome do inimigo deve ter no mínimo 3 caracteres.")
         @Size(max = 20, message = "O nome do inimigo deve ter no máximo 20 caracteres.")
-        String enemyName,
+        String name,
 
         @NotNull(message = "O HP do inimigo é obrigatório.")
-        Long enemyHp,
+        Long hp,
 
         @NotNull(message = "A AP do inimigo é obrigatório.")
-        Long enemyAp,
+        Long ap,
 
         @NotNull(message = "A DP do inimigo é obrigatório.")
-        Long enemyDp,
+        Long dp,
 
         @NotNull(message = "O drop de XP do inimigo é obrigatório.")
-        Long enemyXpDrop
+        Long xpDrop
 ) {
 }

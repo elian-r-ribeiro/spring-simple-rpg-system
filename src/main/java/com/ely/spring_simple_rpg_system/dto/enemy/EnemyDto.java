@@ -1,11 +1,11 @@
 package com.ely.spring_simple_rpg_system.dto.enemy;
 
 public record EnemyDto(
-        Long enemyId,
-        String enemyName,
-        Long enemyHp,
-        Long enemyAp,
-        Long enemyDp,
-        Long enemyXpDrop
+        Long id,
+        String name,
+        Long hp,
+        Long ap,
+        Long dp,
+        Long xpDrop
 ) {
 }

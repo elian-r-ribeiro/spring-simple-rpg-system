@@ -4,23 +4,23 @@ import com.ely.spring_simple_rpg_system.entity.Item;
 import java.util.List;
 
 public record PlayerDto(
-        Long playerId,
+        Long id,
 
-        String playerName,
+        String name,
 
-        Long playerAttackPower,
+        Long attackPower,
 
-        Long playerDefensePower,
+        Long defensePower,
 
-        Long playerCurrentHp,
+        Long currentHp,
 
-        Long playerMaxHp,
+        Long maxHp,
 
-        Long playerLevel,
+        Long level,
 
-        Long playerXp,
+        Long xp,
 
-        Long playerRequiredXpToNextLevel,
+        Long requiredXpToNextLevel,
 
         List<Item> playerItems
 ) {

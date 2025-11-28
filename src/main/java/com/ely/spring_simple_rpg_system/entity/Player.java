@@ -19,23 +19,23 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long playerId;
+    private Long id;
 
-    private String playerName;
+    private String name;
 
-    private Long playerAttackPower;
+    private Long attackPower;
 
-    private Long playerDefensePower;
+    private Long defensePower;
 
-    private Long playerCurrentHp;
+    private Long currentHp;
 
-    private Long playerMaxHp;
+    private Long maxHp;
 
-    private Long playerLevel;
+    private Long level;
 
-    private Long playerXp;
+    private Long xp;
 
-    private Long playerRequiredXpToNextLevel;
+    private Long requiredXpToNextLevel;
 
     @ManyToMany
     @JoinTable(
@@ -43,17 +43,17 @@ public class Player {
             joinColumns = @JoinColumn(name = "player_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    private List<Item> playerItems = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     @PrePersist
     public void appyDefaultStats() {
 
-        if(playerAttackPower == null) this.playerAttackPower = 10L;
-        if(playerDefensePower == null) this.playerDefensePower = 10L;
-        if(playerCurrentHp == null) this.playerCurrentHp = 50L;
-        if(playerMaxHp == null) this.playerMaxHp = 50L;
-        if(playerLevel == null) this.playerLevel = 1L;
-        if(playerXp == null) this.playerXp = 0L;
-        if(playerRequiredXpToNextLevel == null) this.playerRequiredXpToNextLevel = 100L;
+        if(attackPower == null) this.attackPower = 10L;
+        if(defensePower == null) this.defensePower = 10L;
+        if(currentHp == null) this.currentHp = 50L;
+        if(maxHp == null) this.maxHp = 50L;
+        if(level == null) this.level = 1L;
+        if(xp == null) this.xp = 0L;
+        if(requiredXpToNextLevel == null) this.requiredXpToNextLevel = 100L;
     }
 }

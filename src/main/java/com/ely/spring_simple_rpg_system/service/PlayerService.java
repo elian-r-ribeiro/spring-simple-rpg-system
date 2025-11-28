@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PlayerService {
 
-    public PlayerRepository playerRepository;
+    private PlayerRepository playerRepository;
 
     public PlayerDto createPlayer(PlayerCreationDto data) {
         Player newPlayer = playerRepository.save(PlayerConverter.fromCreationDtoToPlayer(data));
@@ -38,17 +38,21 @@ public class PlayerService {
     public PlayerDto updatePlayer(PlayerUpdateDto data, Long id) {
         final Player player = findPlayerByIdOrThrowException(id);
 
-        player.setPlayerName(data.playerName());
+        player.setName(data.name());
 
         return PlayerConverter.fromPlayerToDto(playerRepository.save(player));
     }
 
     public void deletePlayer(Long id) {
         final Player player = findPlayerByIdOrThrowException(id);
-        playerRepository.deleteById(id);
+        playerRepository.delete(player);
     }
 
     public Player findPlayerByIdOrThrowException(Long id) {
         return playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException(id));
+    }
+
+    public void savePlayerAfterCombat(Player player) {
+        playerRepository.save(player);
     }
 }

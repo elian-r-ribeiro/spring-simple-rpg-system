@@ -10,30 +10,30 @@ public class EnemyConverter {
     public static Enemy fromCreationDtoToEnemy(EnemyCreationDto dto) {
         return new Enemy(
                 null,
-                dto.enemyName(),
-                dto.enemyHp(),
-                dto.enemyAp(),
-                dto.enemyDp(),
-                dto.enemyXpDrop()
+                dto.name(),
+                dto.hp(),
+                dto.ap(),
+                dto.dp(),
+                dto.xpDrop()
         );
     }
 
     public static EnemyDto fromEnemyToDto(Enemy enemy) {
         return new EnemyDto(
-                enemy.getEnemyId(),
-                enemy.getEnemyName(),
-                enemy.getEnemyHp(),
-                enemy.getEnemyAp(),
-                enemy.getEnemyDp(),
-                enemy.getEnemyXpDrop()
+                enemy.getId(),
+                enemy.getName(),
+                enemy.getHp(),
+                enemy.getAp(),
+                enemy.getDp(),
+                enemy.getXpDrop()
         );
     }
 
     public static void mergeChanges(Enemy enemy, EnemyUpdateDto dto) {
-        if(dto.enemyName() != null) enemy.setEnemyName(dto.enemyName());
-        if(dto.enemyHp() != null) enemy.setEnemyHp(dto.enemyHp());
-        if(dto.enemyAp() != null) enemy.setEnemyAp(dto.enemyAp());
-        if(dto.enemyDp() != null) enemy.setEnemyDp(dto.enemyDp());
-        if(dto.enemyXpDrop() != null) enemy.setEnemyXpDrop(dto.enemyXpDrop());
+        if(dto.name() != null) enemy.setName(dto.name());
+        if(dto.hp() != null) enemy.setHp(dto.hp());
+        if(dto.ap() != null) enemy.setAp(dto.ap());
+        if(dto.dp() != null) enemy.setDp(dto.dp());
+        if(dto.xpDrop() != null) enemy.setXpDrop(dto.xpDrop());
     }
 }

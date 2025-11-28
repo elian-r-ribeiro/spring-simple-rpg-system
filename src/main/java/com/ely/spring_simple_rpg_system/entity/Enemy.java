@@ -16,15 +16,15 @@ public class Enemy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long enemyId;
+    private Long id;
 
-    private String enemyName;
+    private String name;
 
-    private Long enemyHp;
+    private Long hp;
 
-    private Long enemyAp;
+    private Long ap;
 
-    private Long enemyDp;
+    private Long dp;
 
-    private Long enemyXpDrop;
+    private Long xpDrop;
 }

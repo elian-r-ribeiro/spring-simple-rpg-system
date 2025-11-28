@@ -10,7 +10,7 @@ public class PlayerConverter {
 
         return new Player(
                 null,
-                dto.playerName(),
+                dto.name(),
                 null,
                 null,
                 null,
@@ -24,16 +24,16 @@ public class PlayerConverter {
 
     public static PlayerDto fromPlayerToDto(Player player) {
         return new PlayerDto(
-                player.getPlayerId(),
-                player.getPlayerName(),
-                player.getPlayerAttackPower(),
-                player.getPlayerDefensePower(),
-                player.getPlayerCurrentHp(),
-                player.getPlayerMaxHp(),
-                player.getPlayerLevel(),
-                player.getPlayerXp(),
-                player.getPlayerRequiredXpToNextLevel(),
-                player.getPlayerItems()
+                player.getId(),
+                player.getName(),
+                player.getAttackPower(),
+                player.getDefensePower(),
+                player.getCurrentHp(),
+                player.getMaxHp(),
+                player.getLevel(),
+                player.getXp(),
+                player.getRequiredXpToNextLevel(),
+                player.getItems()
         );
     }
 }
